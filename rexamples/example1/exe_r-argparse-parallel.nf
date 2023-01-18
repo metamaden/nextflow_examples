@@ -8,8 +8,9 @@ nextflow.enable.dsl=2
  * 
  */
 
-params.rscriptpath1 = "rscript1.R"
-params.rscriptpath2 = "rscript2.R"
+params.outdir = "$launchDir/outdir/"
+params.rscriptpath1 = "$launchDir/rscript1.R"
+params.rscriptpath2 = "$launchDir/rscript2.R"
 params.myobjval1 = "abcd"
 params.myobjval2 = "efgh"
 
@@ -17,20 +18,24 @@ workflow {
     myobjval1 = channel.of( params.myobjval1 )
     myobjval2 = channel.of( params.myobjval2 )
 
+
     process1(
                 myobjval1
             )
 
     process2(
+                process1.out,
                 myobjval2
             )
 
-    process2.view()
+    process2.out.view()
 }
 
 process process1 {
+    publishDir("$params.outdir", overwrite: true)
+
     input: 
-        var myobjval1
+        val myobjval1
 
     output:
         path("*_myobj1.{rda,rds}")
@@ -42,11 +47,14 @@ process process1 {
 }
 
 process process2 {
+    publishDir("$params.outdir", overwrite: true)
+
     input:
-        var myobjval2
+        path obj1readpath
+        val myobjval2
     
     output:
-        path("*_newobj2.{rda|rds}")
+        path("*_myobj2.{rda|rds}")
 
     script:
     """
