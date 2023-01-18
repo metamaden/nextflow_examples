@@ -10,8 +10,8 @@ nextflow.enable.dsl=2
 // note: each module defines a process for use
 // note: we assign two identifiers for the multiply module in order to reuse it
 
-include { add as script1 } from "$launchDir/modules/add"
-include { multiply as script2; multiply as script3 } from "$launchDir/modules/multiply"
+include { add as add_first } from "$launchDir/modules/add"
+include { multiply as times_first; multiply as times_second } from "$launchDir/modules/multiply"
 
 // define a new workflow
 workflow {
@@ -21,14 +21,11 @@ workflow {
 	multiplyvalue = channel.of(params.multiplyvalue)
 
     // first round of addition
-    script1(sumstartvalue, sumaddvalue)
+    add_first(sumstartvalue, sumaddvalue)
 
     // first round of multiplication
-    script2(script1.out, multiplyvalue)
-
-    // second round of multiplication
-    script3(script2.out, multiplyvalue)
-    script3.out.view()
+    times_first(add_first.out, multiplyvalue)
+    times_first.out.view()
 }
 
 workflow.onComplete {
