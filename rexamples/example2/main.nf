@@ -10,8 +10,8 @@ nextflow.enable.dsl=2
 // note: each module defines a process for use
 // note: we assign two identifiers for the multiply module in order to reuse it
 
-include { add as script1 } from "${launchDir}/modules"
-include { multiply as script2; multiply as script3 } from "${launchDir}/modules"
+include { add as script1 } from params.modulesdir
+include { multiply as script2; multiply as script3 } from $params.modulesdir
 
 // define a new workflow
 workflow {
