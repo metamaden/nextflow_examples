@@ -12,7 +12,7 @@ process multiply {
         path readfile
         val multiplyvalue
     output:
-        path("*newproduct.rda")
+        path("*_newproduct.rda")
 
     script:
     """

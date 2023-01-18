@@ -6,9 +6,6 @@
 // set dsl version
 nextflow.enable.dsl=2
 
-// manually set config file path
-includeConfig "$launchDir/params.config"
-
 // include modules for workflow
 // note: each module defines a process for use
 // note: we assign two identifiers for the multiply module in order to reuse it
@@ -19,9 +16,9 @@ include { multiply as times_first; multiply as times_second } from "$launchDir/m
 // define a new workflow
 workflow {
 	// get channels
-	sumstartvalue = channel.of(params.sumstartvalue)
-	sumaddvalue = channel.of(params.sumaddvalue)
-	multiplyvalue = channel.of(params.multiplyvalue)
+	sumstartvalue = channel.fromList([1, 2, 3])
+	sumaddvalue = channel.fromList([4, 5, 6])
+	multiplyvalue = channel.fromList([1, 2, 3])
 
     // first round of addition
     add_first(sumstartvalue, sumaddvalue)

@@ -1,28 +1,24 @@
-# example 2
+# example 3
 
 ## Description
 
-This workflow defines two processes called `add` and `multiply`. The first adds two integers together and saves
-them to `newsum.rda`. The second loads some specified file, multiplies it by a specified value, saves the 
-product as `newproduct.rda`, and returns the new file path.
+This workflow build on the example #2 workflow. It uses a similar setup, except that data values are now included in the
+new output filenames which are saved/loaded. Two lists of unique integers are passed to the `add` process, and one list of
+unique integers is passed to the `multiply` process. Running the workflow produces the following outputs in `./outdir/`:
 
-## Files
-
-* `main.nf` : The main NextFlow script defining the workflow.
-* `nextflow.config` : The configurations file defining workflow parameters.
-* `/rscripts/add.R` : Script to add together two specified integers and save them to `newsum.rda`
-* `/rscripts/multiply.R/` : Script to load some file, multiple loaded file's value by a specified integer, and save to `newproduct.rda`
-* `/modules/add.nf` : Defines the process calling `add.R` for the workflow.
-* `/modules/multiply.nf/` : Defines the process calling `multiply.R` for the workflow.
+```
+value-14_newproduct.rda  
+value-5_newsum.rda  
+value-9_newproduct.rda
+value-15_newproduct.rda  
+value-7_newsum.rda  
+value-9_newsum.rda
+```
 
 ## Concepts
 
-This example shows the following concepts:
+In addition to concepts introduced in example #2, this example shows the following concepts:
 
-* Using modules in a separate `./modules/` subdirectory.
-* Set parameters in a dedicated file called `parameters.config`. 
-* Specify configuration manually in `main.nf` with `includeConfig`
-* Loading and running modules in a dedicated script called `main.nf`.
-* Organizing scripts within `./rscripts/` subdirectory.
-* In `main.nf`, line 14, calling a module twice under separate names. This enables repeatedly running a module in the same workflow.
-* In `main.nf`, lines 31+, specify messages for success and failure of workflow run.
+* Specify additional external configuration files manually in `nextflow.config` with `includeConfig`
+* Specify variable output filenames in `.R` scripts
+* Use `.fromList` to parse lists of values as input channels in `main.nf`

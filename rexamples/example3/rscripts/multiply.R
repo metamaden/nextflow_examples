@@ -12,4 +12,5 @@ args <- parser$parse_args()
 # run script
 res.old <- get(load(args$readfilename))
 res.new <- as.numeric(res.old) * as.numeric(args$multiplyvalue)
-save(res.new, file = "newproduct.rda")
+new.fname <- paste0("value-", res.new, "_newproduct.rda")
+save(res.new, file = new.fname)

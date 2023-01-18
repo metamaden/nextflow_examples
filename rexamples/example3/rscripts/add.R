@@ -12,4 +12,5 @@ args <- parser$parse_args()
 # run script
 res <- as.numeric(args$firstvalue)
 res <- res + as.numeric(args$secondvalue)
-save(res, file = "newsum.rda")
+new.fname <- paste0("value-",res,"_newsum.rda")
+save(res, file = new.fname)

@@ -12,7 +12,7 @@ process add {
         val sumstartvalue
         val sumaddvalue
     output:
-        path("*newsum.rda")
+        path("*_newsum.rda")
 
     script:
     """
