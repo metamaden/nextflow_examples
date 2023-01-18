@@ -10,5 +10,5 @@ parser$add_argument("-valuetwo", "--secondvalue", type="integer", default=TRUE,
 args <- parser$parse_args()
 
 # run script
-res <- args$valueone + args$valuetwo
+res <- as.numeric(args$valueone) + as.numeric(args$valuetwo)
 save(res, file = "newsum.rda")
