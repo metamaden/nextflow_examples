@@ -1,0 +1,4 @@
+﻿process,parameter,value1,value2,value3
+add,sumstartvalue,1,2,3
+add,sumaddvalue,4,5,6
+multiply,multiplyvalue,1,2,3
