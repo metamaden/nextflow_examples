@@ -54,7 +54,7 @@ process process2 {
         val myobjval2
     
     output:
-        path("*_myobj2.{rda|rds}")
+        path("*_myobj2.{rda,rds}")
 
     script:
     """
