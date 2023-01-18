@@ -5,14 +5,14 @@
 // set dsl version
 nextflow.enable.dsl=2
 
-process add {
+process multiply {
     publishDir("$params.outdir", overwrite: true)
 
     input:
         path readfile
         val multiplyvalue
     output:
-        path("newproduct.rda")
+        path("*newproduct.rda")
 
     script:
     """

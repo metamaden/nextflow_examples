@@ -10,8 +10,8 @@ nextflow.enable.dsl=2
 // note: each module defines a process for use
 // note: we assign two identifiers for the multiply module in order to reuse it
 
-include { add as script1 } from params.modulesdir
-include { multiply as script2; multiply as script3 } from $params.modulesdir
+include { add as script1 } from "$launchDir/modules/add"
+include { multiply as script2; multiply as script3 } from "$launchDir/modules/multiply"
 
 // define a new workflow
 workflow {
@@ -24,11 +24,11 @@ workflow {
     script1(sumstartvalue, sumaddvalue)
 
     // first round of multiplication
-    script2(multiplyvalue)
+    script2(script1.out, multiplyvalue)
 
     // second round of multiplication
-    script3(multiplyvalue)
-    script3.out()
+    script3(script2.out, multiplyvalue)
+    script3.out.view()
 }
 
 workflow.onComplete {
