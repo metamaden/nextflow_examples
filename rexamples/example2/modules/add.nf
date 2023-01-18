@@ -12,11 +12,11 @@ process add {
         val sumstartvalue
         val sumaddvalue
     output:
-        path("*newsum.rda")
+        path("newsum.rda")
 
     script:
     """
-    Rscript scriptpath -valueone $sumstartvalue -valuetwo $sumaddvalue
+    Rscript $params.addscriptpath -valueone $sumstartvalue -valuetwo $sumaddvalue
     """
 }
 

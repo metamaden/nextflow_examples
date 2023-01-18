@@ -1,26 +1,23 @@
 #!/usr/bin/env nextflow
 
-// defines process to multiple some input, save, and return file path
+// defines process to multiply some input, save, and return file path
 
 // set dsl version
 nextflow.enable.dsl=2
 
-process countmatrix {
-  label 'high'
-  publishDir "$params.outdir/countmatrix", mode: 'copy', overwrite: true
-  container 'hediatnani/nf-renv:633e6c7'
-  
-  
-input:
-    path("*counts.tsv")
-output:
-    path("countmatrix.tsv"), emit: countmatr
+process add {
+    publishDir("$params.outdir", overwrite: true)
 
+    input:
+        path readfile
+        val multiplyvalue
+    output:
+        path("newproduct.rda")
 
-  script:
-"""
-Rscript --vanilla  $launchDir/bin/countmatrix.R
-"""
+    script:
+    """
+    Rscript $params.multiplyscriptpath -r $readfile -m $multiplyvalue
+    """
 }
 
 
