@@ -6,7 +6,18 @@
 nextflow.enable.dsl=2
 
 process add {
+    publishDir("$params.outdir", overwrite: true)
 
+    input:
+        val sumstartvalue
+        val sumaddvalue
+    output:
+        path("*newsum.rda")
+
+    script:
+    """
+    Rscript scriptpath -valueone $sumstartvalue -valuetwo $sumaddvalue
+    """
 }
 
 
