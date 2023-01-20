@@ -9,7 +9,7 @@ process randomsce {
     publishDir("$params.outdir", overwrite: true)
 
     input:
-        path writefile
+        path $scefname
         val zerofreq
     output:
         path("*sce_fz-*(.rda,.rds)")
