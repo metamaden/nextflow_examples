@@ -5,17 +5,18 @@
 // set dsl version
 nextflow.enable.dsl=2
 
-process multiply {
+process randomsce {
     publishDir("$params.outdir", overwrite: true)
 
     input:
         path writefile
+        val zerofreq
     output:
         path("*sce_fz-*(.rda,.rds)")
 
     script:
     """
-    Rscript $params.randomscescript -w $writefile -fz $params.zerofreq
+    Rscript $params.randomscescript -w $writefile -fz $zerofreq
     """
 }
 

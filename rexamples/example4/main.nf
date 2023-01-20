@@ -7,22 +7,21 @@ nextflow.enable.dsl=2
 
 // include modules for workflow
 
-include { add as add_first } from "$launchDir/modules/add"
-include { multiply as times_first; multiply as times_second } from "$launchDir/modules/multiply"
+include { randomsce as randomsce } from "$launchDir/modules/make_random_sce"
+include { cellvaluefilter as cellvaluefilter } from "$launchDir/modules/filter_value_cells"
 
 // define a new workflow
 workflow {
 	// get channels
-	sumstartvalue = channel.fromList([1, 2, 3])
-	sumaddvalue = channel.fromList([4, 5, 6])
-	multiplyvalue = channel.fromList([1, 2, 3])
+	zfreqlist = channel.fromList([0.1, 0.2, 0.3])
+	mzflist = channel.fromList([0.1, 0.2, 0.3])
 
     // first round of addition
-    add_first(sumstartvalue, sumaddvalue)
+    randomsce(zfreqlist)
 
     // first round of multiplication
-    times_first(add_first.out, multiplyvalue)
-    times_first.out.view()
+    cellvaluefilter(randomsce.out, mzflist)
+    cellvaluefilter.out.view()
 }
 
 workflow.onComplete {
