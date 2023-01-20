@@ -13,11 +13,12 @@ include { cellvaluefilter as cellvaluefilter } from "$launchDir/modules/filter_v
 // define a new workflow
 workflow {
 	// get channels
+    fnlist = channel.fromList([params.scefname, params.scefname, params.scefname])
 	zfreqlist = channel.fromList([0.1, 0.2, 0.3])
 	mzflist = channel.fromList([0.1, 0.2, 0.3])
 
     // first round of addition
-    randomsce( channel.of(params.scefname), zfreqlist )
+    randomsce( fnlist, zfreqlist )
 
     // first round of multiplication
     cellvaluefilter( randomsce.out, mzflist )

@@ -6,7 +6,7 @@
 nextflow.enable.dsl=2
 
 process randomsce {
-    publishDir("$params.outdir", overwrite: true)
+    publishDir("$params.outdir", mode: "copy", overwrite: false)
 
     input:
         val filename

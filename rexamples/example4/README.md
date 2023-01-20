@@ -19,3 +19,5 @@ class `SingleCellExperiment`. This is called by the module `make_random_sce.nf`.
 * `SingleCellExperiment` workflows
 * Prototyping workflows
 * Informative and dynamic filenames
+* Setting the `publishDir` arguments:
+** `mode` : Setting this to "copy" to store full `sce` object files (rather than symlinks, etc.) 

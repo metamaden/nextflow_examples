@@ -6,7 +6,7 @@
 nextflow.enable.dsl=2
 
 process cellvaluefilter {
-    publishDir("$params.outdir", overwrite: true)
+    publishDir("$params.outdir", mode: "copy", overwrite: false, safeAs: "new")
 
     input:
         path readfile
