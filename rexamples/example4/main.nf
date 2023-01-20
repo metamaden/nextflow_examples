@@ -17,7 +17,7 @@ workflow {
 	mzflist = channel.fromList([0.1, 0.2, 0.3])
 
     // first round of addition
-    randomsce(zfreqlist)
+    randomsce(channel.of(params.scefname), zfreqlist)
 
     // first round of multiplication
     cellvaluefilter(randomsce.out, mzflist)
