@@ -12,11 +12,11 @@ process cellvaluefilter {
         path readfile
         val maxzerofreq
     output:
-        path("*_zfilt-mzf-*(.rda,.rds)")
+        path("*_zfilt-m*")
 
     script:
     """
-    Rscript $params.randomscescript -r $readfile -mzf $maxzerofreq
+    Rscript $params.filtvalcellsscript -r "$readfile" -m $maxzerofreq
     """
 }
 

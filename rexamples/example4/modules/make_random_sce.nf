@@ -9,14 +9,14 @@ process randomsce {
     publishDir("$params.outdir", overwrite: true)
 
     input:
-        path $scefname
+        val filename
         val zerofreq
     output:
-        path("*sce_fz-*(.rda,.rds)")
+        path("*.rda")
 
     script:
     """
-    Rscript $params.randomscescript -w $writefile -fz $zerofreq
+    Rscript $params.randomscescript -w $filename -z $zerofreq
     """
 }
 

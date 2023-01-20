@@ -20,7 +20,7 @@ workflow {
     randomsce( channel.of(params.scefname), zfreqlist )
 
     // first round of multiplication
-    cellvaluefilter(randomsce.out, mzflist)
+    cellvaluefilter( randomsce.out, mzflist )
     cellvaluefilter.out.view()
 }
 

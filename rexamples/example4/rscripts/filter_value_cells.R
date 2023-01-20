@@ -12,7 +12,7 @@ suppressPackageStartupMessages(library("argparse"))
 parser <- ArgumentParser() # create parser object
 parser$add_argument("-r", "--readfpath", type="character", default=TRUE,
                     help = paste0("Path to SingleCellExperiment object to read."))
-parser$add_argument("-mzf", "--maxzerofreq", type="integer", default=0.3,
+parser$add_argument("-m", "--maxzerofreq", type="double", default=0.3,
                     help="Maximum allowed frequency of zero-value genes.")
 args <- parser$parse_args()
 
@@ -25,6 +25,10 @@ sce <- get(load(args$readfpath))
 scef <- filter_value_cells(sce, filter.term = "zerocount", verbose = T,
                            max.value.freq = args$maxzerofreq)
 # save filtered data
-new.fname <- paste0(args$readfpath, "_zfilt-mzf-", args$zerofreq)
+new.fname.stem <- "_zfilt-m"
+new.fname.param <- gsub("\\.", "", as.character(args$maxzerofreq))
+new.fname <- gsub("\\..*", "", args$readfpath)
+new.fname <- paste0(new.fname, "_", new.fname.stem, new.fname.param)
 new.fname <- paste0(new.fname, ".rda")
+message("saving new file: ", new.fname)
 save(scef, file = new.fname)
